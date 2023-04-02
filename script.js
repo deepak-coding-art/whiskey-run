@@ -4,6 +4,8 @@ const c = canvas.getContext("2d");
 const startBtn = document.getElementById("startBtn");
 const winBtn = document.getElementById("winBtn");
 
+const baseUrl = "/whiskey-run/";
+
 let stop = false;
 let frameCount = 0;
 let fps, fpsInterval, startTime, now, then, elapsed;
@@ -18,30 +20,30 @@ let gameOver = false;
 let win = false;
 
 let playerImage = new Image();
-playerImage.src = "./images/man20.png";
+playerImage.src = `${baseUrl}images/man20.png`;
 const spriteWidth = 80;
 const spriteHeight = 110;
 let playerFrameX = 0;
 let playerFrameY = 0;
 
 let enemyImage = new Image();
-enemyImage.src = "./images/zombie1.png";
+enemyImage.src = `${baseUrl}images/zombie1.png`;
 let enemyFrameX = 0;
 let enemyFrameY = 0;
 
 let appleImage = new Image();
-appleImage.src = "./images/bottle.png";
+appleImage.src = `${baseUrl}images/bottle.png`;
 
 let rockImage = new Image();
-rockImage.src = "./images/meteor1.png";
+rockImage.src = `${baseUrl}images/meteor1.png`;
 let rockFrameX = 0;
 let rockFrameY = 0;
 
 let backgroundImg = new Image();
-backgroundImg.src = "./images/background_01.jpg";
+backgroundImg.src = `${baseUrl}images/background_01.jpg`;
 
 let platformImage = new Image();
-platformImage.src = "./images/platform.png";
+platformImage.src = `${baseUrl}images/platform.png`;
 
 let gameFrame = 0;
 let stagerFrame = 5;
