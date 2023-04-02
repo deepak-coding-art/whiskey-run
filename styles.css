@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.canvas-element {
+  width: 100%;
+  background: url("../images/background_01.jpg");
+  background-size: 100% 100%;
+  height: 100%;
+}
+
+.startContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+}
+
+.startMessage {
+  text-align: center;
+  color: rgb(66, 52, 52);
+  font-size: 1.5rem;
+}
+
+.startButton {
+  background-color: rgb(255, 204, 109);
+  border: solid 2px rgb(75, 70, 60);
+  border-radius: 5px;
+  font-size: 1.5rem;
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+}
+
+.startButton:hover {
+  background-color: wheat;
+}
+
+.hide {
+  display: none;
+}
+
+.winContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+}
+
+.winMessage {
+  text-align: center;
+  color: rgb(66, 52, 52);
+  font-size: 1.5rem;
+}
+
+.winBtn {
+  background-color: rgb(255, 204, 109);
+  border: solid 2px rgb(75, 70, 60);
+  border-radius: 5px;
+  font-size: 1.5rem;
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+}
+
+.winBtn:hover {
+  background-color: wheat;
+}
