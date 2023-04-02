@@ -533,5 +533,5 @@ addEventListener("touchend", () => {
 });
 
 winBtn.addEventListener("click", () => {
-  window.location.href = "https://google.com/";
+  window.location.href = "https://82chapters.com/pages/game";
 });
