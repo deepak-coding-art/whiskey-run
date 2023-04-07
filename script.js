@@ -4,14 +4,25 @@ const c = canvas.getContext("2d");
 const startBtn = document.getElementById("startBtn");
 const winBtn = document.getElementById("winBtn");
 
-const baseUrl = "/whiskey-run/";
+const baseUrl = "/";
 
 let stop = false;
 let frameCount = 0;
 let fps, fpsInterval, startTime, now, then, elapsed;
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+// Get the device pixel ratio
+const dpr = window.devicePixelRatio || 1;
+
+// Get the canvas size in CSS pixels
+const canvasWidth = canvas.clientWidth;
+const canvasHeight = canvas.clientHeight;
+
+// Set the canvas size in device pixels
+canvas.width = canvasWidth * dpr;
+canvas.height = canvasHeight * dpr;
+
+// canvas.width = canvas.clientWidth;
+// canvas.height = canvas.clientHeight;
 
 const gravity = 0.5;
 let score = 0;
@@ -50,7 +61,7 @@ let stagerFrame = 5;
 
 let animationRequestId;
 
-let winScore = 1;
+let winScore = 10;
 
 // character
 class Player {
@@ -455,74 +466,61 @@ function winGame() {
   document.getElementById("winContainer").style.display = "flex";
 }
 
-addEventListener("keydown", ({ keyCode }) => {
-  switch (keyCode) {
-    case 65:
-      keys.left.pressed = true;
-      break;
-    case 83:
-      break;
-    case 68:
-      keys.right.pressed = true;
-      break;
-    case 87:
-      if (player.velocity.y == 0 && !keys.up.pressed) {
-        player.velocity.y -= 20;
-      }
-      keys.up.pressed = true;
-      break;
-  }
-});
-
-addEventListener("keyup", ({ keyCode }) => {
-  switch (keyCode) {
-    case 65:
-      keys.left.pressed = false;
-      break;
-    case 83:
-      break;
-    case 68:
-      keys.right.pressed = false;
-      break;
-    case 87:
-      keys.up.pressed = false;
-      break;
-  }
-});
-
-addEventListener("mousedown", (mouse) => {
-  if (mouse.y < canvas.height / 2) {
-    // Jump logic
+addEventListener("keydown", ({ key }) => {
+  if (key === "a" || key === "ArrowLeft") {
+    keys.left.pressed = true;
+    return;
+  } else if (key === "d" || key === "ArrowRight") {
+    keys.right.pressed = true;
+    return;
+  } else if (key === "w" || key === "ArrowUp" || key === " ") {
     if (player.velocity.y == 0 && !keys.up.pressed) {
       player.velocity.y -= 20;
     }
     keys.up.pressed = true;
+    return;
   }
-  if (mouse.x > player.position.x + player.width) {
-    keys.right.pressed = true;
-  } else if (mouse.x <= player.position.x) {
-    keys.left.pressed = true;
+});
+
+addEventListener("keyup", ({ key }) => {
+  if (key === "a" || key === "ArrowLeft") {
+    keys.left.pressed = false;
+    return;
+  } else if (key === "d" || key === "ArrowRight") {
+    keys.right.pressed = false;
+    return;
+  } else if (key === "w" || key === "ArrowUp" || key === " ") {
+    keys.up.pressed = false;
+    return;
+  } else if (key === "Enter") {
+    if (gameOver) {
+      gameOver = false;
+    }
   }
 });
 
 addEventListener("mouseup", () => {
   gameOver = false;
-  keys.up.pressed = false;
-  keys.right.pressed = false;
-  keys.left.pressed = false;
 });
 
 addEventListener("touchstart", (touch) => {
-  console.log(touch.touches[0].clientX, touch.touches[0].clientY);
-  if (touch.touches[0].clientY < canvas.height / 2) {
+  // console.log("🙎Player: ", player.position.x, player.position.y);
+  // console.log(
+  //   "👆 Touch: ",
+  //   touch.touches[0].clientX * dpr,
+  //   touch.touches[0].clientY * dpr
+  // );
+  const touchX = touch.touches[0].clientX * dpr;
+  const touchY = touch.touches[0].clientY * dpr;
+  if (touchY < canvas.height / 2) {
     if (player.velocity.y == 0 && !keys.up.pressed) {
       player.velocity.y -= 20;
     }
     keys.up.pressed = true;
   }
-  if (touch.touches[0].clientX > canvas.width / 2) {
+  if (touchX > canvas.width / 2) {
     keys.right.pressed = true;
-  } else if (touch.touches[0].clientX <= canvas.width / 2) {
+  } else if (touchX <= canvas.width / 2) {
     keys.left.pressed = true;
   }
 });
