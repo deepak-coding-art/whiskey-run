@@ -4,7 +4,7 @@ const c = canvas.getContext("2d");
 const startBtn = document.getElementById("startBtn");
 const winBtn = document.getElementById("winBtn");
 
-const baseUrl = "/";
+const baseUrl = "/whiskey-run/";
 
 let stop = false;
 let frameCount = 0;
